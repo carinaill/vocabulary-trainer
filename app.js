@@ -1,10 +1,19 @@
 class App {
+  initialise = true;
+
   async startTraining() {
     this.hideElement("#startButton");
-    await this.loadVocabulary();
-    this.initialiseCards();
+    if (this.initialise) {
+      await this.initialiseTraining();
+    }
     this.renderCard();
     this.showElement("#card");
+  }
+
+  async initialiseTraining() {
+    await this.loadVocabulary();
+    this.initialiseCards();
+    this.initialise = false;
   }
 
   showElement(selector) {
@@ -23,12 +32,33 @@ class App {
   }
 
   initialiseCards() {
+    this.reset();
+    document.querySelector("#card").addEventListener("click", (ev) => {
+      if (this.finished()) {
+        this.reset();
+        this.returnToStart();
+      } else {
+        this.updateCard();
+        this.renderCard();
+      }
+    });
+  }
+
+  finished() {
+    return (
+      this.currentWord == this.json.vocabulary.length - 1 &&
+      this.spanish == false
+    );
+  }
+
+  reset() {
     this.currentWord = 0;
     this.spanish = true;
-    document.querySelector("#card").addEventListener("click", (ev) => {
-      this.updateCard();
-      this.renderCard();
-    });
+  }
+
+  returnToStart() {
+    this.hideElement("#card");
+    this.showElement("#startButton");
   }
 
   updateCard() {
