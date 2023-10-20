@@ -8,7 +8,16 @@
   </head>
 
   <body>
-    <button class="button" type="button" onclick="app.onClick()">Starte deinen Vokabeltrainer
-	</button>
+    <button
+      class="button"
+      id="startButton"
+      type="button"
+      onclick="app.startTraining()"
+    >
+      Starte deinen Vokabeltrainer
+    </button>
+    <div class="card hidden" id="card">
+      <h2>keine vokabel</h2>
+    </div>
   </body>
 </html>
