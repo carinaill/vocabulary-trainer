@@ -2,7 +2,8 @@ class App {
   async startTraining() {
     this.hideElement("#startButton");
     await this.loadVocabulary();
-    this.updateCard();
+    this.initialiseCards();
+    this.renderCard();
     this.showElement("#card");
   }
 
@@ -21,8 +22,29 @@ class App {
     this.json = await msg.json();
   }
 
+  initialiseCards() {
+    this.currentWord = 0;
+    this.spanish = true;
+    document.querySelector("#card").addEventListener("click", (ev) => {
+      this.updateCard();
+      this.renderCard();
+    });
+  }
+
   updateCard() {
-    document.querySelector("#card h2").innerText = this.json.vocabulary[0].es;
+    if (this.spanish) {
+      this.spanish = false;
+    } else {
+      this.currentWord++;
+      this.spanish = true;
+    }
+  }
+
+  renderCard() {
+    const word = this.json.vocabulary[this.currentWord];
+    const text = this.spanish ? word.es : word.de;
+
+    document.querySelector("#card h2").innerText = text;
   }
 }
 
