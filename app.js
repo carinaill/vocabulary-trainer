@@ -1,12 +1,12 @@
 class App {
-  initialise = true;
+  initialized = false;
 
   async startTraining() {
     this.hideElement("#startButton");
-    if (this.initialise) {
+    if (!this.initialized) {
       await this.initialiseTraining();
     }
-    this.initialiseOrderArray();
+    this.initialiseWordsOrder();
     this.reset();
     this.renderCard();
     this.showElement("#card");
@@ -15,7 +15,7 @@ class App {
   async initialiseTraining() {
     await this.loadVocabulary();
     this.initialiseCards();
-    this.initialise = false;
+    this.initialized = true;
   }
 
   showElement(selector) {
@@ -40,22 +40,9 @@ class App {
     });
   }
 
-  initialiseOrderArray() {
-    this.wordsOrder = [];
-    for (let i = 0; i < this.json.vocabulary.length; i++) {
-      this.wordsOrder[i] = i;
-    }
-    this.shuffleArray();
-  }
-
-  shuffleArray() {
-    for (let i = this.wordsOrder.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [this.wordsOrder[i], this.wordsOrder[j]] = [
-        this.wordsOrder[j],
-        this.wordsOrder[i],
-      ];
-    }
+  initialiseWordsOrder() {
+    const numbers = Util.initializeNumberArray(this.json.vocabulary.length);
+    this.wordsOrder = Util.randomizeArray(numbers);
   }
 
   update() {
