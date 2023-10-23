@@ -6,6 +6,8 @@ class App {
     if (this.initialise) {
       await this.initialiseTraining();
     }
+    this.initialiseOrderArray();
+    this.reset();
     this.renderCard();
     this.showElement("#card");
   }
@@ -32,27 +34,57 @@ class App {
   }
 
   initialiseCards() {
-    this.reset();
     document.querySelector("#card").addEventListener("click", (ev) => {
-      if (this.finished()) {
-        this.reset();
-        this.returnToStart();
-      } else {
-        this.updateCard();
-        this.renderCard();
-      }
+      this.update();
+      this.render();
     });
   }
 
-  finished() {
+  initialiseOrderArray() {
+    this.wordsOrder = [];
+    for (let i = 0; i < this.json.vocabulary.length; i++) {
+      this.wordsOrder[i] = i;
+    }
+    this.shuffleArray();
+  }
+
+  shuffleArray() {
+    for (let i = this.wordsOrder.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [this.wordsOrder[i], this.wordsOrder[j]] = [
+        this.wordsOrder[j],
+        this.wordsOrder[i],
+      ];
+    }
+  }
+
+  update() {
+    this.finished = false;
+    if (this.isFinished()) {
+      this.finished = true;
+      this.reset();
+    } else {
+      this.updateCard();
+    }
+  }
+
+  render() {
+    if (this.finished) {
+      this.returnToStart();
+    } else {
+      this.renderCard();
+    }
+  }
+
+  isFinished() {
     return (
-      this.currentWord == this.json.vocabulary.length - 1 &&
-      this.spanish == false
+      this.wordsOrderIndex == this.wordsOrder.length && this.spanish == false
     );
   }
 
   reset() {
-    this.currentWord = 0;
+    this.currentWord = this.wordsOrder[0];
+    this.wordsOrderIndex = 1;
     this.spanish = true;
   }
 
@@ -65,7 +97,8 @@ class App {
     if (this.spanish) {
       this.spanish = false;
     } else {
-      this.currentWord++;
+      this.currentWord = this.wordsOrder[this.wordsOrderIndex];
+      this.wordsOrderIndex++;
       this.spanish = true;
     }
   }
