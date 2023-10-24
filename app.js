@@ -34,9 +34,21 @@ class App {
   }
 
   initialiseCards() {
+    const card = document.querySelector("#card").addEventListener
+    const right = document.querySelector("#rightButton").addEventListener
+    const wrong = document.querySelector("#wrongButton").addEventListener
+
     document.querySelector("#card").addEventListener("click", (ev) => {
-      this.update();
-      this.render();
+      if(wrong.clicked){
+        this.update();
+        this.render();
+      }else if(right.clicked){
+        this.update();
+        this.render();
+      }else{
+        this.update();
+        this.render();
+      }
     });
   }
 
@@ -82,8 +94,12 @@ class App {
 
   updateCard() {
     if (this.spanish) {
+    this.showElement("#rightButton");
+    this.showElement("#wrongButton");
       this.spanish = false;
     } else {
+      this.hideElement("#rightButton");
+      this.hideElement("#wrongButton");
       this.currentWord = this.wordsOrder[this.wordsOrderIndex];
       this.wordsOrderIndex++;
       this.spanish = true;

@@ -28,7 +28,7 @@
   display: none;
 }
 
-.button {
+.startButton {
   border: 2px solid #000000;
   background-color: white;
   padding: 50px 50px;
@@ -47,7 +47,27 @@
   bottom: 0;
   right: 0;
 }
-.button:hover {
+.startButton:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
   background-color: rgb(248, 248, 248);
+}
+.rightButton {
+  border: 2px solid #000000;
+  background-color: green;
+  font-size: x-large;
+  cursor: pointer;
+  width: 5em;
+  height: 3em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+.wrongButton {
+  border: 2px solid #000000;
+  background-color: red;
+  font-size: x-large;
+  cursor: pointer;
+  width: 5em;
+  height: 3em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
 }

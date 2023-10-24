@@ -8,7 +8,7 @@
 
   <body>
     <button
-      class="button"
+      class="startButton"
       id="startButton"
       type="button"
       onclick="app.startTraining()"
@@ -17,7 +17,23 @@
     </button>
     <div class="card hidden" id="card">
       <h2>keine vokabel</h2>
+      <button
+      class="rightButton hidden"
+      id="rightButton"
+      type="button"
+    >
+      Richtig
+    </button>
+    <button
+      class="wrongButton hidden"
+      id="wrongButton"
+      type="button"
+    >
+      Falsch
+    </button>
     </div>
+    
+
     <script src="util.js"></script>
     <script src="app.js"></script>
 
