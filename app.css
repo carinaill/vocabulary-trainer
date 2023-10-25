@@ -1,4 +1,25 @@
-.card {
+.spanishCard {
+  background-color: rgba(247, 238, 255, 0.873);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  text-align: center;
+  font-size: x-large;
+  border: 1px solid #000000;
+  width: 25em;
+  height: 15em;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  cursor: pointer;
+}
+.spanishCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+.germanCard {
+  background-color: rgba(255, 250, 209, 0.835);
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   border-radius: 5px;
   text-align: center;
@@ -15,11 +36,15 @@
   cursor: pointer;
 }
 
-.card:hover {
+.germanCard:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.card h2 {
+.spanishCard h2 {
+  padding: 115px 0;
+  text-align: center;
+}
+.germanCard h2 {
   padding: 115px 0;
   text-align: center;
 }
@@ -53,7 +78,7 @@
 }
 .rightButton {
   border: 2px solid #000000;
-  background-color: green;
+  background-color: rgb(85, 255, 110);
   font-size: x-large;
   cursor: pointer;
   width: 5em;
@@ -63,7 +88,7 @@
 }
 .wrongButton {
   border: 2px solid #000000;
-  background-color: red;
+  background-color: rgb(255, 85, 85);
   font-size: x-large;
   cursor: pointer;
   width: 5em;

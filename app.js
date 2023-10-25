@@ -8,13 +8,15 @@ class App {
     }
     this.initialiseWordsOrder();
     this.reset();
+    this.card = "#spanishCard h2";
     this.renderCard();
-    this.showElement("#card");
+    this.showElement("#spanishCard");
   }
 
   async initialiseTraining() {
     await this.loadVocabulary();
-    this.initialiseCards();
+    this.initialiseSpanishCard();
+    this.initialiseGermanCard();
     this.initialized = true;
   }
 
@@ -33,17 +35,23 @@ class App {
     this.json = await msg.json();
   }
 
-  initialiseCards() {
-    const card = document.querySelector("#card").addEventListener;
-    const right = document.querySelector("#rightButton").addEventListener;
-    const wrong = document.querySelector("#wrongButton").addEventListener;
-
-    document.querySelector("#card").addEventListener("click", (ev) => {
+  initialiseSpanishCard() {
+    document.querySelector("#spanishCard").addEventListener("click", (ev) => {
       this.update();
       this.render();
     });
+  }
+
+  initialiseGermanCard() {
+    document.querySelector("#rightButton").addEventListener("click", (ev) => {
+      this.update();
+      this.render();
+    });
+
     document.querySelector("#wrongButton").addEventListener("click", (ev) => {
       this.wordsOrder.push(this.currentWord);
+      this.update();
+      this.render();
     });
   }
 
@@ -83,32 +91,32 @@ class App {
   }
 
   returnToStart() {
-    this.hideElement("#card");
+    this.hideElement("#spanishCard");
+    this.hideElement("#germanCard");
     this.showElement("#startButton");
-    this.hideElement("#rightButton");
-    this.hideElement("#wrongButton");
   }
 
   updateCard() {
     if (this.spanish) {
-      this.showElement("#rightButton");
-      this.showElement("#wrongButton");
+      this.hideElement("#spanishCard");
+      this.showElement("#germanCard");
       this.spanish = false;
+      this.card = "#germanCard h2";
     } else {
-      this.hideElement("#rightButton");
-      this.hideElement("#wrongButton");
+      this.hideElement("#germanCard");
+      this.showElement("#spanishCard");
       this.currentWord = this.wordsOrder[this.wordsOrderIndex];
-
       this.wordsOrderIndex++;
       this.spanish = true;
+      this.card = "#spanishCard h2";
     }
   }
 
   renderCard() {
     const word = this.json.vocabulary[this.currentWord];
     const text = this.spanish ? word.es : word.de;
-
-    document.querySelector("#card h2").innerText = text;
+    
+    document.querySelector(this.card).innerText = text;
   }
 }
 
