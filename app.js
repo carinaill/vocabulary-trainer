@@ -1,20 +1,51 @@
 class App {
   initialized = false;
 
-  async startTraining() {
+  async chooseSet() {
     this.hideElement("#startButton");
+    await this.loadVocabulary("sets.json");
+    if (!this.initialized) {
+      await this.initialiseSets();
+    } else {
+      this.showElement(".flexbox");
+    }
+  }
+
+  async startTraining() {
+    this.hideElement(".flexbox");
+    await this.loadVocabulary(this.vocabularySet);
     if (!this.initialized) {
       await this.initialiseTraining();
     }
     this.initialiseWordsOrder();
     this.reset();
-    this.card = "#spanishCard h2";
     this.renderCard();
-    this.showElement("#spanishCard");
+  }
+
+  async initialiseSets() {
+    let box = document.createElement("div");
+    box.className = "flexbox";
+
+    for (let i = 0; i < this.json.sets.length; i++) {
+      let div = document.createElement("div");
+      div.className = "card";
+      div.id = `card${i}`;
+      box.appendChild(div);
+      document.body.appendChild(box);
+
+      document.querySelector(
+        `#card${i}`
+      ).innerHTML = `<h2>Lerne die ${this.json.sets[i].name} auf Spanisch</h2>`;
+
+      div.addEventListener("click", async (ev) => {
+        this.vocabularySet = this.json.sets[i].dateiname;
+        console.log(this.vocabularySet);
+        await this.startTraining();
+      });
+    }
   }
 
   async initialiseTraining() {
-    await this.loadVocabulary();
     this.initialiseSpanishCard();
     this.initialiseGermanCard();
     this.initialized = true;
@@ -30,8 +61,8 @@ class App {
     element.classList.add("hidden");
   }
 
-  async loadVocabulary() {
-    const msg = await fetch("vocabulary.json");
+  async loadVocabulary(selector) {
+    const msg = await fetch(selector);
     this.json = await msg.json();
   }
 
@@ -98,25 +129,25 @@ class App {
 
   updateCard() {
     if (this.spanish) {
-      this.hideElement("#spanishCard");
-      this.showElement("#germanCard");
       this.spanish = false;
-      this.card = "#germanCard h2";
     } else {
-      this.hideElement("#germanCard");
-      this.showElement("#spanishCard");
       this.currentWord = this.wordsOrder[this.wordsOrderIndex];
       this.wordsOrderIndex++;
       this.spanish = true;
-      this.card = "#spanishCard h2";
     }
   }
 
   renderCard() {
     const word = this.json.vocabulary[this.currentWord];
     const text = this.spanish ? word.es : word.de;
-    
-    document.querySelector(this.card).innerText = text;
+    const toHide = this.spanish ? "#germanCard" : "#spanishCard";
+    const toShow = this.spanish ? "#spanishCard" : "#germanCard";
+    const card = `${toShow} h2`;
+
+    document.querySelector(card).innerText = text;
+
+    this.hideElement(toHide);
+    this.showElement(toShow);
   }
 }
 

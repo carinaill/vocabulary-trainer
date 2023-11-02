@@ -1,0 +1,34 @@
+{
+    "vocabulary": [
+      {
+        "es": "lunes",
+        "de": "Montag"
+      },
+      {
+        "es": "martes",
+        "de": "Dienstag"
+      },
+      {
+        "es": "miercoles",
+        "de": "Mittwoch"
+      },
+      {
+        "es": "jueves",
+        "de": "Donnerstag"
+      },
+      {
+        "es": "viernes",
+        "de": "Freitag"
+      },
+      {
+        "es": "sabado",
+        "de": "Samstag"
+      },
+      {
+        "es": "domingo",
+        "de": "Sonntag"
+      }
+  
+    ]
+  }
+  

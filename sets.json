@@ -1,0 +1,16 @@
+{
+  "sets": [
+    {
+      "name": "Tiere",
+      "dateiname": "tiere.json"
+    },
+    {
+      "name": "Farben",
+      "dateiname": "farben.json"
+    },
+    {
+      "name": "Wochentage",
+      "dateiname": "wochentage.json"
+    }
+  ]
+}

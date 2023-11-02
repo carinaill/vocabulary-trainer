@@ -1,0 +1,32 @@
+{
+  "vocabulary": [
+    {
+      "es": "azul",
+      "de": "blau"
+    },
+    {
+      "es": "rojo",
+      "de": "rot"
+    },
+    {
+      "es": "verde",
+      "de": "grün"
+    },
+    {
+      "es": "amarillo",
+      "de": "gelb"
+    },
+    {
+      "es": "blanco",
+      "de": "weiß"
+    },
+    {
+      "es": "negro",
+      "de": "schwarz"
+    },
+    {
+      "es": "naranja",
+      "de": "orange"
+    }
+  ]
+}

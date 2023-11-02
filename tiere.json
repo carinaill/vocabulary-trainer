@@ -1,0 +1,34 @@
+{
+    "vocabulary": [
+      {
+        "es": "el gato",
+        "de": "die Katze"
+      },
+      {
+        "es": "el perro",
+        "de": "der Hund"
+      },
+      {
+        "es": "el caballo",
+        "de": "das Pferd"
+      },
+      {
+        "es": "la vaca",
+        "de": "die Kuh"
+      },
+      {
+        "es": "el conejo",
+        "de": "das Kaninchen"
+      },
+      {
+        "es": "la gallina",
+        "de": "das Huhn"
+      },
+      {
+        "es": "el burro",
+        "de": "der Esel"
+      }
+  
+    ]
+  }
+  
